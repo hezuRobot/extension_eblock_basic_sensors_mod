@@ -1,0 +1,66 @@
+{	"extensionName": "Basic Sensors",
+	"sort":1,
+	"author":"modificacion realizada por Jesus Romero",
+	"extensionPort": 0,
+	"firmware":"1.1.103",
+	"javascriptURL":"js/arduino.js",
+	"blockSpecs": [
+
+
+		["R", "potentiometer · pin%n","getPotentiometer","0",
+		{"encode":"{d0}","setup":"pinMode({0},INPUT);\n","inc":"","def":"","work":"","loop":""}],
+
+		["R", "temp DS18B20 · pin%n","getDS18B20","0",
+		{"encode":"{d0}","setup":"ds18b20_{0}.begin();\n","inc":"#include <OneWire.h>\n#include \"DallasTemperature.h\"","def":"OneWire wire_{0}({0});\nDallasTemperature ds18b20_{0}(&wire_{0}); ","work":"ds18b20_{0}.getTempCByIndex(0)","loop":"ds18b20_{0}.requestTemperatures();\n"}],
+
+		["R", "temperature · pin%n","getTemp","0",
+		{"encode":"{d0}","setup":"pinMode({0},INPUT);\n","inc":"","def":"","work":"","loop":""}],
+
+		["R", "light level · pin%n","getLight","0",
+		{"encode":"{d0}","setup":"pinMode({0},INPUT);\n","inc":"","def":"","work":"","loop":""}],
+
+		["R", "sound sensor · pin%n","getSound","0",
+		{"encode":"{d0}","setup":"pinMode({0},INPUT);\n","inc":"","def":"","work":"","loop":""}],
+
+
+		["w", "led %m.onoff · pin%n","setLed", "On", "0",
+		{"encode":"{d0}{d1}","setup":"pinMode({1}, OUTPUT);\n","inc":"","def":"","work":"digitalWrite({1}, {0});\n","loop":""}],
+
+
+		["R", "read ultrasonic sensor trig pin %n echo pin %n","getUltrasonicArduino",13,12,
+		{"encode":"{d0}","setup":"","inc":"","def":"--separator--float getDistance(int trig,int echo){\npinMode(trig,OUTPUT);\ndigitalWrite(trig,LOW);\ndelayMicroseconds(2);\ndigitalWrite(trig,HIGH);\ndelayMicroseconds(10);\ndigitalWrite(trig,LOW);\npinMode(echo, INPUT);\nreturn pulseIn(echo,HIGH,30000)/58.0;\n}\n","work":"getDistance({0},{1})","loop":""}],
+
+
+		["R", "valor tocado en el pin %n","getTocado","0",
+		{"encode":"{d0}","setup":"pinMode({0},INPUT);\n","inc":"","def":"","work":"touchRead({0})","loop":""}],
+
+		["w", "play RTTTL %s en pin %n","tocaRTTL","Arkanoid:d=4,o=5,b=140:8g6,16p,16g.6,2a#6","18",
+		{"encode":"{d0}{d1}","setup":"","inc":"#include <NonBlockingRtttl.h>\n","def":"","work":"rtttl::begin({1}, {0});\nwhile( !rtttl::done() )\n{\nrtttl::play();\n}\n","loop":""}],
+
+	],
+	"menus": {
+			"onoff": ["On", "Off"],
+		"beats":["500","250","125","1000","2000","0"],
+		"servovalue":["0","45","90","135","180"],
+		"pwmvalue":["0","50","100","150","255"],
+		"digital":["HIGH","LOW"],
+		"notes":["C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6","C7","D7","E7","F7","G7","A7","B7","C8","D8"],
+		"beats":["Half","Quarter","Eighth","Whole","Double","Zero"]
+	},
+	"values":{
+	"On":1,
+		"Off":0,
+		"run":2,
+		"get":1,
+		"digital":30,
+		"analog":31,
+		"pwm":32,
+		"servo_pin":33,
+		"tone":34,
+		"timer":50,
+		"HIGH":1,"LOW":0
+
+	},
+	"translators":{
+	}
+}
