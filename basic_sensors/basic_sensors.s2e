@@ -23,7 +23,7 @@
 		{"encode":"{d0}","setup":"pinMode({0},INPUT);\n","inc":"","def":"","work":"","loop":""}],
 
 
-		["w", "led %m.onoff · pin%n","setLed", "On", "0",
+		["w", "led %d.digital · pin%n","setLed", "HIGH", "0",
 		{"encode":"{d0}{d1}","setup":"pinMode({1}, OUTPUT);\n","inc":"","def":"","work":"digitalWrite({1}, {0});\n","loop":""}],
 
 

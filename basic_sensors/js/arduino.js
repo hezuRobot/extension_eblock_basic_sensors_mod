@@ -26,8 +26,8 @@
 		Off:0
 	};
 	var levels = {
-		HIGH:1,
-		LOW:0
+		"HIGH":1,
+		"LOW":0
 	};
 	var axis = {
 		'X-Axis':1,
@@ -74,6 +74,11 @@
 	ext.getDigital = function(nextID,pin){
 		var deviceId = 30;
 		getPackage(nextID,deviceId,pin);
+	};
+    ext.setLed = function(valor,pin){
+		var deviceId = 30;
+    valor = levels[valor];
+		runPackage(30,pin,[valor]);
 	};
   ext.getTocado = function(nextID,pin){
     var deviceId = 63;
